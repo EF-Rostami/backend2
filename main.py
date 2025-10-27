@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from database import Base, engine
 from config import ALLOWED_ORIGINS
 
@@ -55,8 +56,8 @@ async def root():
     }
 
 @app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
+async def health_check(request: Request):
+    return JSONResponse(content={"status": "healthy"})
 
 if __name__ == "__main__":
     import uvicorn
