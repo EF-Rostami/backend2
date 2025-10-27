@@ -18,7 +18,15 @@ if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable must be set")
 
 # CORS
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+# CORS
+ALLOWED_ORIGINS = [
+    origin.strip() for origin in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+    if origin.strip()
+]
+
 
 # Frontend URL for emails
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+FRONTEND_URL = [
+    url.strip() for url in os.getenv("FRONTEND_URL", "http://localhost:3000").split(",")
+    if url.strip()
+]
