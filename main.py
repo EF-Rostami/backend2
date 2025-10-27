@@ -55,7 +55,7 @@ async def root():
         "status": "All systems operational"
     }
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health_check(request: Request):
     return JSONResponse(content={"status": "healthy"})
 
